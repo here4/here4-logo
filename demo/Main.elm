@@ -10,6 +10,7 @@ import Here4.Placement exposing (defaultPlacement)
 import Here4.Primitive.Cube exposing (skyCube, fireCube, fogMountainsCube, voronoiCube, cubeMesh)
 import Here4.Primitive.Diamond exposing (cloudsDiamond, fogMountainsDiamond)
 import Here4.Primitive.Sphere exposing (skySphere, cloudsSphere)
+import Here4.RAM as RAM
 import Here4.Vehicle.DreamBird as DreamBird
 import Here4.Vehicle.DreamBuggy as DreamBuggy
 import Here4.Vehicle.Walking as Walking
@@ -17,7 +18,6 @@ import Math.Vector3 as V3 exposing (vec3)
 import Boids
 import BoxRoom
 import Balls
-import RAM
 import Sky
 import StaticGround
 import WaterWalls
