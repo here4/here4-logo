@@ -1,4 +1,4 @@
-module Demo exposing (create, Flags, Model, Msg)
+module RAM exposing (create, Flags, Model, Msg)
 
 import Here4.App exposing (..)
 import Here4.Control exposing (..)
@@ -9,22 +9,24 @@ import Here4.World as World exposing (..)
 import Task
 
 
-type alias Flags = ()
+type alias Flags =
+    ()
 
 
-type alias DemoMsg
-    = ()
+type alias RAMMsg =
+    ()
 
 
 type alias Msg =
-    WorldMsg (NavMsg DemoMsg)
+    WorldMsg (NavMsg RAMMsg)
 
 
-type alias DemoModel = ()
+type alias RAMModel =
+    ()
 
 
 type alias Model =
-    Multiverse DemoModel
+    Multiverse RAMModel
 
 
 create :
@@ -34,14 +36,16 @@ create attributes =
     World.create init update subscriptions attributes
 
 
-init : Flags -> ( DemoModel, Cmd (NavMsg DemoMsg) )
+init : Flags -> ( RAMModel, Cmd (NavMsg RAMMsg) )
 init flags =
-    ( () , Cmd.none )
+    ( (), Cmd.none )
 
 
-update : NavMsg DemoMsg -> DemoModel -> ( DemoModel, Cmd (NavMsg DemoMsg) )
-update msg model = ( model, Cmd.none )
+update : NavMsg RAMMsg -> RAMModel -> ( RAMModel, Cmd (NavMsg RAMMsg) )
+update msg model =
+    ( model, Cmd.none )
 
 
-subscriptions : Multiverse DemoModel -> Sub (NavMsg DemoMsg)
-subscriptions model = Sub.none
+subscriptions : Multiverse RAMModel -> Sub (NavMsg RAMMsg)
+subscriptions model =
+    Sub.none

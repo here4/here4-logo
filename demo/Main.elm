@@ -17,7 +17,7 @@ import Math.Vector3 as V3 exposing (vec3)
 import Boids
 import BoxRoom
 import Balls
-import Demo
+import RAM
 import Sky
 import StaticGround
 import WaterWalls
@@ -25,9 +25,9 @@ import Body.Terrain as Terrain
 import Body.Wedge exposing (wedge)
 
 
-main : Navigator Demo.Flags Demo.Model Demo.Msg
+main : Navigator RAM.Flags RAM.Model RAM.Msg
 main =
-    Demo.create
+    RAM.create
         [ { id = "world1"
           , label = "Logolia"
           , backgroundColor = rgb 135 206 235
