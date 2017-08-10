@@ -32,9 +32,7 @@ main =
           , label = "Logolia"
           , backgroundColor = rgb 135 206 235
           , apps =
-                [ StaticGround.create Terrain.generate
-                , WaterWalls.create defaultPlacement
-                , Sky.create skySphere
+                [ BoxRoom.create { dimensions = vec3 20 3 10 }
                 ]
           , defaultSelf = avatar 8.0
           }
