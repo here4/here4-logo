@@ -18,7 +18,10 @@ main =
           , label = "Logolia"
           , backgroundColor = rgb 135 206 235
           , apps =
-                [ BoxRoom.create { dimensions = vec3 20 3 10 }
+                [ let
+                      room = BoxRoom.default
+                  in
+                      BoxRoom.create { room | dimensions = vec3 20 3 10 }
                 ]
           , defaultSelf = avatar 8.0
           }
