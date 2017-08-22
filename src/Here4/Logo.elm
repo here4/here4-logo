@@ -1,6 +1,7 @@
 module Here4.Logo
     exposing
         ( logo
+        , logoWith
         , textureLogo
         )
 
@@ -21,7 +22,8 @@ type alias Triple a =
 logo =
     render logoMesh
 
-
+logoWith f =
+    renderNSV (logoMeshWith f)
 
 
 
@@ -54,6 +56,41 @@ render mesh vertexShader fragmentShader p =
             , viewPosition = p.cameraPos
             , lightPosition = p.lightPosition
             , ambientColor = p.ambientColor
+            }
+        ]
+
+
+renderNSV mesh vertexShader fragmentShader p =
+    let
+        resolution =
+            vec3 (toFloat p.windowSize.width) (toFloat p.windowSize.height) 0
+
+        s =
+            p.globalTime
+
+        detail =
+            p.measuredFPS / 3.0
+
+        iHMD =
+            if p.cameraVR then
+                1.0
+            else
+                0.0
+    in
+        [ entity vertexShader
+            fragmentShader
+            mesh
+            { iResolution = resolution
+            , iHMD = iHMD
+            , iGlobalTime = s
+            , iLensDistort = p.lensDistort
+            , modelViewProjectionMatrix = M4.mul p.perspective p.lookAt
+            , modelMatrix = M4.identity
+            , viewPosition = p.cameraPos
+            , lightPosition = p.lightPosition
+            , ambientColor = p.ambientColor
+            , iDetail = detail
+            , iGlobalTimeV = s
             }
         ]
 
@@ -94,6 +131,11 @@ map3 f ( v1, v2, v3 ) =
 logoMesh : Mesh Vertex
 logoMesh =
     triangles <| List.concatMap rotatedFace [ ( 0, 0, 0 ), ( 90, 0, 1 ), ( 180, 0, 2 ), ( 270, 0, 3 ), ( 0, 90, 0 ), ( 0, -90, 0 ) ]
+
+
+logoMeshWith : (Vertex -> v) -> Mesh v
+logoMeshWith f =
+    triangles <| List.map (map3 f) <| List.concatMap rotatedFace [ ( 0, 0, 0 ), ( 90, 0, 1 ), ( 180, 0, 2 ), ( 270, 0, 3 ), ( 0, 90, 0 ), ( 0, -90, 0 ) ]
 
 
 rotatedFace : ( Float, Float, Float ) -> List (Triple Vertex)
